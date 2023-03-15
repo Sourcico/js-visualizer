@@ -1,0 +1,62 @@
+.App {
+  display: flex;
+  justify-content: space-around;
+  height: 100vh;
+  align-items: center;
+}
+
+header {
+  height: 6vh;
+  background-color: yellowgreen;
+  text-align: center;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.actions-container {
+  height: 8vh;
+}
+.code-editor-container {
+  border: 2px solid aquamarine;
+  width: 30%;
+  height: 96vh;
+}
+
+.execution-visualizer-container {
+  border: 2px solid aquamarine;
+  width: 66%;
+  height: 96vh;
+}
+
+.ne-znam {
+  display: flex;
+  height: 100%;
+}
+
+.call-stack-container {
+  height: 100%;
+  background-color: red;
+  flex: 26%;
+}
+
+.right-test {
+  height: 100%;
+  background-color: green;
+  flex: 80%;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+button {
+  width: 100px;
+  height: 40px;
+  border-radius: 5%;
+  border: none;
+  background-color: aquamarine;
+  font-weight: 600;
+  font-size: 1em;
+}

@@ -1,0 +1,28 @@
+html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000000;
+  background-image: radial-gradient(
+      70% 20% ellipse at center top,
+      #201e40 0%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    radial-gradient(70% 30% ellipse at center bottom, #261226 0%, #100a1c 100%);
+  background-attachment: fixed;
+}
