@@ -7,24 +7,27 @@
 
 header {
   height: 6vh;
-  background-color: yellowgreen;
+  border-bottom: 2px solid aquamarine;
   text-align: center;
   font-size: 2em;
   font-weight: 700;
+  color: white;
 }
 
 .actions-container {
   height: 8vh;
 }
 .code-editor-container {
+  display: flex;
+  flex-direction: column;
   border: 2px solid aquamarine;
-  width: 30%;
+  width: 26%;
   height: 96vh;
 }
 
 .execution-visualizer-container {
   border: 2px solid aquamarine;
-  width: 66%;
+  width: 70%;
   height: 96vh;
 }
 
@@ -35,14 +38,21 @@ header {
 
 .call-stack-container {
   height: 100%;
-  background-color: red;
-  flex: 26%;
+  border-right: 2px solid aquamarine;
+
+  flex: 18%;
 }
 
-.right-test {
+.execution-logs-container {
   height: 100%;
-  background-color: green;
-  flex: 80%;
+  border-right: 2px solid aquamarine;
+  flex: 18%;
+}
+.right-test {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex: 64%;
 }
 
 .actions-container {
@@ -51,6 +61,14 @@ header {
   align-items: center;
 }
 
+.horizontal-container {
+  // height: 90%;
+  width: 96%;
+  height: 32%;
+  margin: 10px;
+  background-color: yellow;
+  // width: 90%;
+}
 button {
   width: 100px;
   height: 40px;
