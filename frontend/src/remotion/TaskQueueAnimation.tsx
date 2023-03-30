@@ -11,7 +11,7 @@ const tilesArray = [
     timing: {
       type: "fixed",
       start: 0,
-      end: 50,
+      end: 5,
     },
   },
   {
@@ -20,8 +20,8 @@ const tilesArray = [
     text: "second",
     timing: {
       type: "fixed",
-      start: 20,
-      end: 40,
+      start: 1,
+      end: 10,
     },
   },
   {
@@ -30,8 +30,8 @@ const tilesArray = [
     text: "third",
     timing: {
       type: "fixed",
-      start: 40,
-      end: 30,
+      start: 2,
+      end: 15,
     },
   },
 ];
@@ -50,23 +50,17 @@ export const TaskQueueAnimation = () => {
     <Fragment>
       {/* Figure out how to change the position of a tile based on the surrounding tiles, and whether they are still appearing or */}
       {tilesArray.map((tile, index, tilesArray) => {
-        const getTilePosition = () => {
-          if (index === 0) {
-            return 0;
-          }
-          if (tilesArray[index - 1].timing.end < frame) {
-            return index - 1;
-          }
-          return index;
-        };
         return (
           <Sequence
-            from={tile.timing.start}
-            durationInFrames={tile.timing.end + tile.timing.start}
+            from={tile.timing.start * 30}
+            durationInFrames={tile.timing.end * 30 - tile.timing.start * 30}
             key={index}
           >
             <AbsoluteFill style={titleStyle}>
-              <Tile content={tile.text} position={index}></Tile>
+              <Tile
+                content={tile.text}
+                position={tile.timing.start * 30}
+              ></Tile>
             </AbsoluteFill>
           </Sequence>
         );

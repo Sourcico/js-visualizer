@@ -41,9 +41,9 @@ const App = () => {
               component={StackAnimation}
               compositionHeight={800}
               compositionWidth={400}
-              durationInFrames={120}
+              durationInFrames={480}
               fps={30}
-              autoPlay
+              controls
             ></Player>
           </div>
           <div className="execution-logs-container"></div>
