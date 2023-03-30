@@ -1,27 +1,17 @@
 import { useState } from "react";
+import { Player } from "@remotion/player";
 import "./App.scss";
-import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
+import Editor from "@monaco-editor/react";
+import { MyComposition } from "./remotion/Composition";
 
 const App = () => {
   const [editorValue, setEditorValue] = useState("");
-  const [valueToPrint, setValueToPrint] = useState("");
 
   const onEditorChange = (event: any) => {
     setEditorValue(event);
   };
 
-  const runCode = () => {
-    const scriptToExecute = new Function(editorValue);
-    selectAllConsoleLogs(editorValue);
-    return scriptToExecute();
-  };
-
-  const selectAllConsoleLogs = (script: string) => {
-    const consoleLogs = [];
-
-    const smt = Array.from(script.matchAll(/console\.log\(([^)]+)\);/gim));
-    console.log("IN HERE", smt);
-  };
+  const runCode = () => {};
 
   return (
     <div className="App">
@@ -44,8 +34,17 @@ const App = () => {
         />
       </div>
       <div className="execution-visualizer-container">
-        <div className="ne-znam">
-          <div className="call-stack-container">{valueToPrint}</div>
+        <div className="sections-container">
+          <div className="call-stack-container">
+            <Player
+              component={MyComposition}
+              compositionHeight={800}
+              compositionWidth={400}
+              durationInFrames={120}
+              fps={30}
+              autoPlay
+            ></Player>
+          </div>
           <div className="execution-logs-container"></div>
           <div className="right-test">
             <div className="horizontal-container"></div>
