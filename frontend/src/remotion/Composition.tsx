@@ -3,38 +3,38 @@ import { Sequence } from "remotion";
 import { useCurrentFrame, AbsoluteFill } from "remotion";
 
 const tilesArray =
-  [
-    {
+[
+  {
       "id": "first",
       "type": "stack",
       "text": "first",
       "timing": {
-        "type": "fixed",
-        "start": 0,
-        "end": 5
+          "type": "fixed",
+          "start": 0,
+          "end": 5
       }
-    },
-    {
+  },
+  {
       "id": "second",
       "type": "stack",
       "text": "second",
       "timing": {
-        "type": "fixed",
-        "start": 1,
-        "end": 10
+          "type": "fixed",
+          "start": 1,
+          "end": 4
       }
-    },
-    {
+  },
+  {
       "id": "third",
       "type": "stack",
       "text": "third",
       "timing": {
-        "type": "fixed",
-        "start": 2,
-        "end": 15
+          "type": "fixed",
+          "start": 2,
+          "end": 3
       }
-    }
-  ];
+  }
+];
 
 const Tile: React.FC<{ content: string; position: number }> = (props) => {
   return (
@@ -47,7 +47,7 @@ const Tile: React.FC<{ content: string; position: number }> = (props) => {
         width: "300px",
         height: "120px",
         background: "transparent",
-        transform: `translateY(${300 - props.position * 3}px)`,
+        transform: `translateY(${300 - props.position * 100}px)`,
       }}
     >
       <div
@@ -80,15 +80,18 @@ export const MyComposition = () => {
     <Fragment>
       {/* Figure out how to change the position of a tile based on the surrounding tiles, and whether they are still appearing or */}
       {tilesArray.map((tile, index, tilesArray) => {
+        
+        let start = tile.timing.start * 30;
+        const end = tile.timing.end * 30;
 
         return (
           <Sequence
-            from={tile.timing.start * 30}
-            durationInFrames={tile.timing.end * 30 - tile.timing.start * 30}
+            from={start}
+            durationInFrames={end - start}
             key={index}
           >
             <AbsoluteFill style={titleStyle}>
-              <Tile content={tile.text} position={tile.timing.start * 30}></Tile>
+              <Tile content={tile.text} position={index}></Tile>
             </AbsoluteFill>
           </Sequence>
         );
