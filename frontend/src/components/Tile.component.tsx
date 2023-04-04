@@ -1,28 +1,36 @@
-const Tile: React.FC<{ content: string; position: number }> = (props) => {
+const Tile: React.FC<{ content: string; index: number; position: string }> = ({
+  content,
+  index,
+  position,
+}) => {
+  const transformAxis =
+    position === "y"
+      ? `translateY(${300 - index * 100}px)`
+      : `translateX(${240 * index}px)`;
   return (
     <div
       className="tile-container"
       style={{
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
-        width: "300px",
-        height: "120px",
+        width: "260px",
+        height: "100px",
         background: "transparent",
-        transform: `translateY(${300 - props.position * 100}px)`,
+        transform: transformAxis,
       }}
     >
       <div
         className="tile"
         style={{
           textAlign: "center",
-          fontSize: "0.5em",
-          width: "200px",
-          height: "80px",
+          width: "160px",
+          height: "60px",
           background: "blue",
+          fontSize: 40,
+          color: "white",
         }}
       >
-        {props.content}
+        {content}
       </div>
     </div>
   );

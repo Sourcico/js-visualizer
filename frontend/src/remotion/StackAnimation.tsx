@@ -1,9 +1,10 @@
-import { Fragment } from "react";
-import { Sequence } from "remotion";
+import { Fragment, useEffect, useState } from "react";
+import { Sequence, spring, useVideoConfig } from "remotion";
 import { useCurrentFrame, AbsoluteFill } from "remotion";
 import Tile from "../components/Tile.component";
+import { CalculatedObj } from "../models/interfaces";
 
-const tilesArray = [
+const tilesArray: CalculatedObj[] = [
   {
     id: "first",
     type: "stack",
@@ -11,7 +12,7 @@ const tilesArray = [
     timing: {
       type: "fixed",
       start: 0,
-      end: 50,
+      end: 15,
     },
   },
   {
@@ -20,8 +21,8 @@ const tilesArray = [
     text: "second",
     timing: {
       type: "fixed",
-      start: 30,
-      end: 70,
+      start: 1,
+      end: 10,
     },
   },
   {
@@ -30,34 +31,38 @@ const tilesArray = [
     text: "third",
     timing: {
       type: "fixed",
-      start: 60,
-      end: 100,
+      start: 2,
+      end: 5,
     },
   },
 ];
 
 export const StackAnimation = () => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
-  const titleStyle = {
+  const scale = spring({
+    fps,
+    frame,
+  });
+
+  const centerElements = {
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 100,
-    color: "white",
   };
 
   return (
     <Fragment>
-      {/* Figure out how to change the position of a tile based on the surrounding tiles, and whether they are still appearing or */}
-      {tilesArray.map((tile, index, tilesArray) => {
+      {tilesArray.map((tile, index) => {
         return (
           <Sequence
-            from={tile.timing.start}
-            durationInFrames={tile.timing.end - tile.timing.start}
+            from={tile.timing.start * 30}
+            durationInFrames={tile.timing.end * 30 - tile.timing.start * 30}
             key={index}
+            // style={{ transform: `scale(${scale})` }} // This only works for the beginning of the animation as a whole, not for every sequence - find a way to apply to each sequence
           >
-            <AbsoluteFill style={titleStyle}>
-              <Tile content={tile.text} position={index}></Tile>
+            <AbsoluteFill style={centerElements}>
+              <Tile content={tile.text} index={index} position="y"></Tile>
             </AbsoluteFill>
           </Sequence>
         );

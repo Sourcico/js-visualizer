@@ -47,15 +47,15 @@ const App = () => {
             ></Player>
           </div>
           <div className="execution-logs-container"></div>
-          <div className="right-test">
+          <div className="animations-container">
             <div className="horizontal-container">
               <Player
                 component={TaskQueueAnimation}
-                compositionHeight={400}
-                compositionWidth={1200}
-                durationInFrames={120}
+                compositionHeight={300}
+                compositionWidth={900}
+                durationInFrames={480}
                 fps={30}
-                autoPlay
+                controls
               ></Player>
             </div>
             <div className="horizontal-container"></div>
