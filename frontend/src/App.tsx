@@ -40,7 +40,7 @@ const App = () => {
               component={MyComposition}
               compositionHeight={800}
               compositionWidth={400}
-              durationInFrames={480}
+              durationInFrames={210}
               fps={30}
               controls
             ></Player>

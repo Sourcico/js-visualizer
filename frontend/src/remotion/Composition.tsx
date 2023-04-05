@@ -81,7 +81,7 @@ export const MyComposition = () => {
       {/* Figure out how to change the position of a tile based on the surrounding tiles, and whether they are still appearing or */}
       {tilesArray.map((tile, index, tilesArray) => {
         
-        let start = tile.timing.start * 30;
+        let start = tile.timing.start * 30 + 1;
         const end = tile.timing.end * 30;
 
         return (
