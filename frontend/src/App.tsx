@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Player } from "@remotion/player";
 import "./App.scss";
 import Editor from "@monaco-editor/react";
-import { StackAnimation } from "./remotion/StackAnimation";
-import { TaskQueueAnimation } from "./remotion/TaskQueueAnimation";
+import { Video } from "./remotion/video/Video";
 
 const App = () => {
   const [editorValue, setEditorValue] = useState("");
@@ -35,33 +34,15 @@ const App = () => {
         />
       </div>
       <div className="execution-visualizer-container">
-        <div className="sections-container">
-          <div className="call-stack-container">
-            <Player
-              component={StackAnimation}
-              compositionHeight={800}
-              compositionWidth={400}
-              durationInFrames={480}
-              fps={30}
-              controls
-            ></Player>
-          </div>
-          <div className="execution-logs-container"></div>
-          <div className="animations-container">
-            <div className="horizontal-container">
-              <Player
-                component={TaskQueueAnimation}
-                compositionHeight={300}
-                compositionWidth={900}
-                durationInFrames={480}
-                fps={30}
-                controls
-              ></Player>
-            </div>
-            <div className="horizontal-container"></div>
-            <div className="horizontal-container"></div>
-          </div>
-        </div>
+        <Player
+          component={Video}
+          compositionHeight={860}
+          compositionWidth={1000}
+          durationInFrames={480}
+          fps={30}
+          autoPlay
+          controls
+        ></Player>
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 import { Fragment, useEffect, useState } from "react";
 import { Sequence } from "remotion";
 import { useCurrentFrame, AbsoluteFill } from "remotion";
-import Tile from "../components/Tile.component";
-import { CalculatedObj } from "../models/interfaces";
+import Tile from "../../components/Tile.component";
+import { CalculatedObj } from "../../models/interfaces";
+import { StackAnimation } from "../stack-animation/StackAnimation";
 
 const tilesArray: CalculatedObj[] = [
   {
@@ -12,7 +13,7 @@ const tilesArray: CalculatedObj[] = [
     timing: {
       type: "fixed",
       start: 0,
-      end: 5,
+      end: 15,
     },
   },
   {
@@ -32,13 +33,48 @@ const tilesArray: CalculatedObj[] = [
     timing: {
       type: "fixed",
       start: 2,
+      end: 5,
+    },
+  },
+];
+
+const queueArray = [
+  {
+    id: "first",
+    type: "queue",
+    text: "first",
+    timing: {
+      type: "fixed",
+      start: 0,
+      end: 5,
+    },
+  },
+  {
+    id: "second",
+    type: "queue",
+    text: "second",
+    timing: {
+      type: "fixed",
+      start: 1,
+      end: 10,
+    },
+  },
+  {
+    id: "third",
+    type: "queue",
+    text: "third",
+    timing: {
+      type: "fixed",
+      start: 2,
       end: 15,
     },
   },
 ];
 
-export const TaskQueueAnimation = () => {
-  const [arrToIterate, setArrToIterate] = useState(tilesArray);
+export const TaskQueueAnimation: React.FC<{ array: CalculatedObj[] }> = ({
+  array,
+}) => {
+  const [arrToIterate, setArrToIterate] = useState(array);
   const frame = useCurrentFrame();
 
   const arrayToIterate = (arr: CalculatedObj[]): CalculatedObj[] => {
@@ -53,7 +89,7 @@ export const TaskQueueAnimation = () => {
   };
 
   useEffect(() => {
-    setArrToIterate(arrayToIterate(tilesArray));
+    setArrToIterate(arrayToIterate(array));
   }, [frame]);
 
   const centerElements = {
@@ -69,9 +105,9 @@ export const TaskQueueAnimation = () => {
             durationInFrames={tile.timing.end * 30 - tile.timing.start * 30}
             key={index}
           >
-            <AbsoluteFill style={centerElements}>
-              <Tile content={tile.text} index={index} position="x"></Tile>
-            </AbsoluteFill>
+            {/* <AbsoluteFill style={centerElements}> */}
+            <Tile content={tile.text} index={index} position="x"></Tile>
+            {/* </AbsoluteFill> */}
           </Sequence>
         );
       })}
