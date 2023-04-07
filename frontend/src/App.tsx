@@ -38,10 +38,9 @@ const App = () => {
           component={Video}
           compositionHeight={860}
           compositionWidth={1000}
-          durationInFrames={480}
+          durationInFrames={450}
           fps={30}
           autoPlay
-          controls
         ></Player>
       </div>
     </div>

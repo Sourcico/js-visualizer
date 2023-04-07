@@ -1,9 +1,10 @@
 import { Fragment, useEffect, useState } from "react";
-import { Sequence } from "remotion";
+import { Sequence, spring, useVideoConfig } from "remotion";
 import { useCurrentFrame, AbsoluteFill } from "remotion";
 import Tile from "../../components/Tile.component";
 import { CalculatedObj } from "../../models/interfaces";
 import { StackAnimation } from "../stack-animation/StackAnimation";
+import { Animating } from "../Animating";
 
 const tilesArray: CalculatedObj[] = [
   {
@@ -76,6 +77,7 @@ export const TaskQueueAnimation: React.FC<{ array: CalculatedObj[] }> = ({
 }) => {
   const [arrToIterate, setArrToIterate] = useState(array);
   const frame = useCurrentFrame();
+  const { fps, durationInFrames } = useVideoConfig();
 
   const arrayToIterate = (arr: CalculatedObj[]): CalculatedObj[] => {
     for (let index = 0; index < arr.length; index++) {
@@ -102,11 +104,14 @@ export const TaskQueueAnimation: React.FC<{ array: CalculatedObj[] }> = ({
         return (
           <Sequence
             from={tile.timing.start * 30}
-            durationInFrames={tile.timing.end * 30 - tile.timing.start * 30}
+            durationInFrames={tile.timing.end * 30}
             key={index}
           >
-            {/* <AbsoluteFill style={centerElements}> */}
+            {/* <Animating index={index}> */}
             <Tile content={tile.text} index={index} position="x"></Tile>
+            {/* </Animating> */}
+            {/* <AbsoluteFill style={centerElements}> */}
+
             {/* </AbsoluteFill> */}
           </Sequence>
         );

@@ -97,8 +97,8 @@ export const Video: React.FC = () => {
 
   return (
     <Fragment>
-      <StackAnimation array={tilesArray}></StackAnimation>
-      <TaskQueueAnimation array={tilesArray}></TaskQueueAnimation>
+      <StackAnimation array={[...tilesArray]}></StackAnimation>
+      {/* <TaskQueueAnimation array={[...queueArray]}></TaskQueueAnimation> */}
     </Fragment>
   );
 };
