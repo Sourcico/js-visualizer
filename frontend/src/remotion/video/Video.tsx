@@ -6,38 +6,38 @@ import { CalculatedObj } from "../../models/interfaces";
 import { StackAnimation } from "../stack-animation/StackAnimation";
 import { TaskQueueAnimation } from "../queue-animation/TaskQueueAnimation";
 
-const tilesArray: CalculatedObj[] = [
-  {
-    id: "first",
-    type: "stack",
-    text: "first",
-    timing: {
-      type: "fixed",
-      start: 0,
-      end: 15,
-    },
-  },
-  {
-    id: "second",
-    type: "stack",
-    text: "second",
-    timing: {
-      type: "fixed",
-      start: 1,
-      end: 10,
-    },
-  },
-  {
-    id: "third",
-    type: "stack",
-    text: "third",
-    timing: {
-      type: "fixed",
-      start: 2,
-      end: 5,
-    },
-  },
-];
+// const tilesArray: CalculatedObj[] = [
+//   {
+//     id: "first",
+//     type: "stack",
+//     text: "first",
+//     timing: {
+//       type: "fixed",
+//       start: 0,
+//       end: 15,
+//     },
+//   },
+//   {
+//     id: "second",
+//     type: "stack",
+//     text: "second",
+//     timing: {
+//       type: "fixed",
+//       start: 1,
+//       end: 10,
+//     },
+//   },
+//   {
+//     id: "third",
+//     type: "stack",
+//     text: "third",
+//     timing: {
+//       type: "fixed",
+//       start: 2,
+//       end: 5,
+//     },
+//   },
+// ];
 
 const queueArray = [
   {
@@ -48,6 +48,7 @@ const queueArray = [
       type: "fixed",
       start: 0,
       end: 5,
+      moveToPrev: [],
     },
   },
   {
@@ -58,6 +59,7 @@ const queueArray = [
       type: "fixed",
       start: 1,
       end: 10,
+      moveToPrev: [4],
     },
   },
   {
@@ -68,9 +70,14 @@ const queueArray = [
       type: "fixed",
       start: 2,
       end: 15,
+      moveToPrev: [3, 8],
     },
   },
 ];
+
+// TODO: Think of a way to set the position of the tiles dynamically, but not depending on the index, rather on the end time
+// (maybe we could use some flag which indicates that the end-time has passed, and based on that we move the tile and all
+// of the subsequent tiles one position to the left)
 
 export const Video: React.FC = () => {
   const [arrToIterate, setArrToIterate] = useState(queueArray);
@@ -97,7 +104,7 @@ export const Video: React.FC = () => {
 
   return (
     <Fragment>
-      <StackAnimation array={[...tilesArray]}></StackAnimation>
+      {/* <StackAnimation array={[...tilesArray]}></StackAnimation> */}
       <TaskQueueAnimation array={[...queueArray]}></TaskQueueAnimation>
     </Fragment>
   );

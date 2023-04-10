@@ -9,43 +9,56 @@ const Tile: React.FC<{
   content: string;
   index: number;
   position: string;
-  reverse?: boolean;
-}> = ({ content, index, position, reverse }) => {
+  moveToPrev?: number[];
+}> = ({ content, index, position, moveToPrev }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
 
+  const rangeBeginning = [0, 30];
+  const rangeEnd = [durationInFrames - 30, durationInFrames];
+
+  let inBetween = [];
+  let inBetweenAnimationValues = [];
+
+  if (moveToPrev!.length > 0) {
+    for (const moveTime of moveToPrev!) {
+      inBetween.push((moveTime - 1) * 30, (moveTime - 1) * 30 + 30);
+      inBetweenAnimationValues.push(1, 0);
+    }
+  }
+
+  console.log([...rangeBeginning, ...inBetween, ...rangeEnd]);
+
   const opacity = interpolate(
     frame,
-    [0, 10, durationInFrames - 10 - index * 30, durationInFrames - index * 30],
-    [0, 1, 1, 0]
+    inBetween.length > 0
+      ? [...rangeBeginning, ...inBetween, ...rangeEnd]
+      : [...rangeBeginning, ...rangeEnd],
+    inBetween.length > 0
+      ? [0, 1, ...inBetweenAnimationValues, 1, 0]
+      : [0, 1, 1, 0],
+    {
+      extrapolateRight: "clamp",
+      extrapolateLeft: "clamp",
+    }
   );
-  const scale = interpolate(
-    frame,
-    [0, 10, durationInFrames - 10 - index * 30, durationInFrames - index * 30],
-    [0.9, 1, 1, 0.9]
-  );
+  // const scale = interpolate(
+  //   frame,
+  //   [...rangeBeginning, ...rangeEnd],
+  //   [0.9, 1, 1, 0.9]
+  // );
 
   const tileContainerHeight = 100;
   const tileContainerWidth = 260;
   const tileContainerBottom = tileContainerHeight * index;
   const tileContainerLeft = tileContainerWidth * index;
 
-  type TileStyle = {
-    opacity?: number;
-    width?: number;
-    height?: number;
-    position?: string;
-    bottom?: number;
-    left?: number;
-    transform?: string;
-  };
-
   let style: React.CSSProperties = {
     opacity,
     width: tileContainerWidth,
     height: tileContainerHeight,
     position: "fixed",
-    transform: `scale(${scale})`,
+    // transform: `scale(${scale})`,
   };
 
   position === "y"

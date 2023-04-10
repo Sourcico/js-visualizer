@@ -6,72 +6,6 @@ import { CalculatedObj } from "../../models/interfaces";
 import { StackAnimation } from "../stack-animation/StackAnimation";
 import { Animating } from "../Animating";
 
-const tilesArray: CalculatedObj[] = [
-  {
-    id: "first",
-    type: "stack",
-    text: "first",
-    timing: {
-      type: "fixed",
-      start: 0,
-      end: 15,
-    },
-  },
-  {
-    id: "second",
-    type: "stack",
-    text: "second",
-    timing: {
-      type: "fixed",
-      start: 1,
-      end: 10,
-    },
-  },
-  {
-    id: "third",
-    type: "stack",
-    text: "third",
-    timing: {
-      type: "fixed",
-      start: 2,
-      end: 5,
-    },
-  },
-];
-
-const queueArray = [
-  {
-    id: "first",
-    type: "queue",
-    text: "first",
-    timing: {
-      type: "fixed",
-      start: 0,
-      end: 5,
-    },
-  },
-  {
-    id: "second",
-    type: "queue",
-    text: "second",
-    timing: {
-      type: "fixed",
-      start: 1,
-      end: 10,
-    },
-  },
-  {
-    id: "third",
-    type: "queue",
-    text: "third",
-    timing: {
-      type: "fixed",
-      start: 2,
-      end: 15,
-    },
-  },
-];
-
 export const TaskQueueAnimation: React.FC<{ array: CalculatedObj[] }> = ({
   array,
 }) => {
@@ -82,7 +16,7 @@ export const TaskQueueAnimation: React.FC<{ array: CalculatedObj[] }> = ({
   const arrayToIterate = (arr: CalculatedObj[]): CalculatedObj[] => {
     for (let index = 0; index < arr.length; index++) {
       const element = arr[index];
-      if (element.timing.end * 30 <= frame + 30) {
+      if (element.timing.end * 30 <= frame) {
         const elementToRemove = arr.shift()!;
         arr.push(elementToRemove);
         return arr;
@@ -111,7 +45,12 @@ export const TaskQueueAnimation: React.FC<{ array: CalculatedObj[] }> = ({
             key={index}
           >
             {/* <Animating index={index}> */}
-            <Tile content={tile.text} index={index} position="x"></Tile>
+            <Tile
+              content={tile.text}
+              index={index}
+              position="x"
+              moveToPrev={tile.timing.moveToPrev}
+            ></Tile>
             {/* </Animating> */}
             {/* <AbsoluteFill style={centerElements}> */}
 

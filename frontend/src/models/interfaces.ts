@@ -7,5 +7,6 @@ export interface CalculatedObj {
     type: string;
     start: number;
     end: number;
+    moveToPrev: number[];
   };
 }
