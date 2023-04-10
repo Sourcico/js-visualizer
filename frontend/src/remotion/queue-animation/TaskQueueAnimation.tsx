@@ -82,8 +82,9 @@ export const TaskQueueAnimation: React.FC<{ array: CalculatedObj[] }> = ({
   const arrayToIterate = (arr: CalculatedObj[]): CalculatedObj[] => {
     for (let index = 0; index < arr.length; index++) {
       const element = arr[index];
-      if (element.timing.end * 30 <= frame) {
-        arr.shift();
+      if (element.timing.end * 30 <= frame + 30) {
+        const elementToRemove = arr.shift()!;
+        arr.push(elementToRemove);
         return arr;
       }
     }
@@ -104,7 +105,9 @@ export const TaskQueueAnimation: React.FC<{ array: CalculatedObj[] }> = ({
         return (
           <Sequence
             from={tile.timing.start * 30}
-            durationInFrames={tile.timing.end * 30}
+            durationInFrames={
+              tile.timing.end * 30 - tile.timing.start * 30 - 30
+            }
             key={index}
           >
             {/* <Animating index={index}> */}
